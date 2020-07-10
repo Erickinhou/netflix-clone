@@ -1,4 +1,4 @@
-import {OnInit, Component} from '@angular/core'
+import {OnInit, Component, Output, EventEmitter, Input} from '@angular/core'
 
 @Component({
   selector: 'app-nav-bar', /*what is the name of component in html */
@@ -7,6 +7,7 @@ import {OnInit, Component} from '@angular/core'
 })
 
 export class NavBarComponent implements OnInit{
+
   constructor(){
 
   }
@@ -14,4 +15,15 @@ export class NavBarComponent implements OnInit{
   ngOnInit(): void {
 
   }
+  @Input() opened= false /* está falando que essa variável pode vir de fora e começa com falso */
+  openMenu(){
+    if(this.opened){
+      this.opened = false
+    } 
+    else{
+      this.opened = true
+    } 
+    this.menuToogle.emit(this.opened)
+  }
+  @Output() menuToogle: EventEmitter<boolean> = new EventEmitter() /* Estou mandando exportar  */
 }
